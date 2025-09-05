@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Gestión de Proyectos</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <header class="bg-indigo-700 text-white p-4 text-center font-bold text-2xl">Dashboard de Proyectos</header>
+  <main class="flex-grow p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Proyectos</h2>
+        <ul id="project-list" class="space-y-4">
+          <!-- Proyectos se cargarán aquí -->
+        </ul>
+      </div>
+      <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Estadísticas</h2>
+        <p>Total proyectos: <span id="total-projects">0</span></p>
+        <p>Completados: <span id="completed-projects">0</span></p>
+        <p>En progreso: <span id="inprogress-projects">0</span></p>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-indigo-700 text-white p-4 text-center">
+    <a href="../index.html" class="underline hover:text-indigo-300">Volver al portafolio</a>
+  </footer>
+
+  <script>
+    const projects = [
+      { id: 1, title: "Sitio Web Cliente A", progress: 20, status: "En progreso" },
+      { id: 2, title: "App Móvil Cliente B", progress: 80, status: "En progreso" },
+      { id: 3, title: "Landing Page", progress: 100, status: "Completado" },
+    ];
+
+    const projectList = document.getElementById('project-list');
+    const totalProjectsEl = document.getElementById('total-projects');
+    const completedProjectsEl = document.getElementById('completed-projects');
+    const inprogressProjectsEl = document.getElementById('inprogress-projects');
+
+    function renderProjects() {
+      projectList.innerHTML = '';
+      projects.forEach(p => {
+        const li = document.createElement('li');
+        li.className = "border p-3 rounded";
+
+        li.innerHTML = `
+          <h3 class="font-semibold">${p.title}</h3>
+          <div class="w-full bg-gray-200 rounded h-4 mt-2">
+            <div class="bg-indigo-600 h-4 rounded" style="width: ${p.progress}%;"></div>
+          </div>
+          <p class="mt-1 text-sm">Estado: <strong>${p.status}</strong></p>
+          <div class="mt-2 space-x-2">
+            ${p.status !== 'Completado' ? `<button class="btn-start bg-green-500 text-white px-3 py-1 rounded">Iniciar</button>` : ''}
+            ${p.status === 'En progreso' ? `<button class="btn-pause bg-yellow-500 text-white px-3 py-1 rounded">Pausar</button>` : ''}
+            ${p.status !== 'Completado' ? `<button class="btn-complete bg-blue-500 text-white px-3 py-1 rounded">Completar</button>` : ''}
+          </div>
+        `;
+
+        if (p.status !== 'Completado') {
+          li.querySelector('.btn-complete').addEventListener('click', () => {
+            p.status = 'Completado';
+            p.progress = 100;
+            renderProjects();
+          });
+        }
+        if (p.status === 'En progreso') {
+          li.querySelector('.btn-pause').addEventListener('click', () => {
+            p.status = 'Pausado';
+            renderProjects();
+          });
+        }
+        if (p.status !== 'Completado' && p.status !== 'En progreso') {
+          const btnStart = li.querySelector('.btn-start');
+          if (btnStart) {
+            btnStart.addEventListener('click', () => {
+              p.status = 'En progreso';
+              if (p.progress === 0) p.progress = 10;
+              renderProjects();
+            });
+          }
+        }
+
+        projectList.appendChild(li);
+      });
+
+      // Actualizar estadísticas
+      totalProjectsEl.textContent = projects.length;
+      completedProjectsEl.textContent = projects.filter(p => p.status === 'Completado').length;
+      inprogressProjectsEl.textContent = projects.filter(p => p.status === 'En progreso').length;
+    }
+
+    renderProjects();
+  </script>
+</body>
+</html>

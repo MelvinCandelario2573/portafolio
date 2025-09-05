@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestión de Proyectos Freelance</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <header class="bg-blue-600 text-white p-4 text-center font-bold text-xl">Gestión de Proyectos Freelance</header>
+  <main class="flex-grow p-4 max-w-md mx-auto w-full">
+    <form id="project-form" class="mb-4 flex space-x-2">
+      <input id="project-input" type="text" placeholder="Nuevo proyecto..." class="flex-grow p-2 border rounded" required />
+      <button type="submit" class="bg-blue-700 text-white px-4 rounded">Agregar</button>
+    </form>
+    <ul id="project-list" class="space-y-4">
+      <!-- Proyectos aquí -->
+    </ul>
+  </main>
+  <footer class="p-4 text-center bg-blue-600 text-white">
+    <p>App para gestionar tus proyectos freelance</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('project-form');
+    const input = document.getElementById('project-input');
+    const list = document.getElementById('project-list');
+
+    let projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+    function saveProjects() {
+      localStorage.setItem('projects', JSON.stringify(projects));
+    }
+
+    function renderProjects() {
+      list.innerHTML = '';
+      if (projects.length === 0) {
+        list.innerHTML = '<li class="text-gray-500 text-center">No hay proyectos aún.</li>';
+        return;
+      }
+      projects.forEach((p, i) => {
+        const li = document.createElement('li');
+        li.className = 'bg-white p-4 rounded shadow flex justify-between items-center';
+        li.innerHTML = `
+          <div>
+            <h3 class="font-semibold text-lg">${p.title}</h3>
+            <p class="text-sm text-gray-600">Estado: <span class="font-semibold">${p.status}</span></p>
+          </div>
+          <div class="space-x-2">
+            <button class="btn-toggle bg-yellow-400 text-white px-3 py-1 rounded">Cambiar Estado</button>
+            <button class="btn-delete bg-red-500 text-white px-3 py-1 rounded">Eliminar</button>
+          </div>
+        `;
+        li.querySelector('.btn-toggle').addEventListener('click', () => {
+          const estados = ['Pendiente', 'En progreso', 'Completado'];
+          let idx = estados.indexOf(p.status);
+          idx = (idx + 1) % estados.length;
+          projects[i].status = estados[idx];
+          saveProjects();
+          renderProjects();
+        });
+        li.querySelector('.btn-delete').addEventListener('click', () => {
+          projects.splice(i, 1);
+          saveProjects();
+          renderProjects();
+        });
+        list.appendChild(li);
+      });
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const title = input.value.trim();
+      if (!title) return;
+      projects.push({ title, status: 'Pendiente' });
+      saveProjects();
+      renderProjects();
+      input.value = '';
+    });
+
+    renderProjects();
+  </script>
+</body>
+</html>

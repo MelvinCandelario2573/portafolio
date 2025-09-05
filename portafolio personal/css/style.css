@@ -1,0 +1,25 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7fafc;
+}
+
+.hero {
+  background-color: #2d3748;
+  color: white;
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/903cd3dc-7c2b-45d7-8fb2-a6633cff4566.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.project {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.project:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+}
+
+.contact {
+  background-color: #edf2f7;
+}
