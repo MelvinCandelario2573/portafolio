@@ -71,3 +71,28 @@ footer {
 html {
   scroll-behavior: smooth;
 }
+
+#contacto {
+  background-color: #fef3c7; /* amarillo muy claro */
+  box-shadow: 0 10px 15px -3px rgba(202, 138, 4, 0.3),
+              0 4px 6px -2px rgba(202, 138, 4, 0.2);
+  border-radius: 1rem;
+  padding: 2.5rem 1.5rem;
+  max-width: 28rem; /* 448px */
+  margin-left: auto;
+  margin-right: auto;
+  color: #92400e; /* amarillo oscuro */
+}
+#contacto a {
+  font-weight: 600;
+}
+#contacto a:hover {
+  text-decoration: underline;
+}
+
+body {
+  background-color: #fefcf3; /* un beige muy suave, cálido */
+  color: #1f2937; /* gris oscuro para texto */
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
