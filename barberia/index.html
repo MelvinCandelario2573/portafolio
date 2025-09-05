@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Barbería El Estilo - Tu mejor corte</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Modal backdrop y estilos similares al primer ejemplo */
+    #modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #modal.active {
+      display: flex;
+    }
+    #modal-content {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+    #close-modal {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      color: #4B5563; /* gray-600 */
+      transition: color 0.2s;
+    }
+    #close-modal:hover {
+      color: #111827; /* gray-900 */
+    }
+    #appointment-message {
+      margin-top: 1rem;
+      color: #16A34A; /* green-600 */
+      text-align: center;
+      display: none;
+    }
+    #appointment-message.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans overflow-x-hidden">
+
+  <!-- Navbar fija -->
+  <nav class="fixed top-0 left-0 right-0 bg-white shadow z-50">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center h-16">
+      <a href="#" class="text-2xl font-extrabold text-yellow-500">Barbería El Estilo</a>
+      <ul class="hidden md:flex space-x-8 text-gray-700 font-semibold">
+        <li><a href="#servicios" class="hover:text-yellow-500">Servicios</a></li>
+        <li><a href="#horario" class="hover:text-yellow-500">Horario</a></li>
+        <li><a href="#contacto" class="hover:text-yellow-500">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="pt-24 pb-20 text-center text-white">
+    <h1 class="text-5xl font-extrabold mb-4 drop-shadow-lg">Barbería El Estilo</h1>
+    <p class="text-xl max-w-xl mx-auto drop-shadow-md">Tu mejor corte y estilo en un solo lugar. Calidad y confianza para tu imagen.</p>
+    <button id="open-modal" class="inline-block mt-8 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded shadow transition cursor-pointer">Reserva tu cita</button>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 pb-20">
+
+    <!-- Servicios -->
+    <section id="servicios" class="my-20">
+      <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Nuestros Servicios</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition">
+          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80" alt="Corte de cabello" class="rounded-lg mb-6 w-full h-48 object-cover" />
+          <h3 class="text-2xl font-semibold mb-3">Corte de Cabello</h3>
+          <p class="text-gray-600">Cortes modernos y clásicos adaptados a tu estilo personal.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition">
+          <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=400&q=80" alt="Afeitado clásico" class="rounded-lg mb-6 w-full h-48 object-cover" />
+          <h3 class="text-2xl font-semibold mb-3">Afeitado Clásico</h3>
+          <p class="text-gray-600">Afeitado con navaja para un acabado suave y profesional.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transition">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Arreglo de barba" class="rounded-lg mb-6 w-full h-48 object-cover" />
+          <h3 class="text-2xl font-semibold mb-3">Arreglo de Barba</h3>
+          <p class="text-gray-600">Perfilado y cuidado de barba con productos de alta calidad.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Horario -->
+    <section id="horario" class="my-20 bg-yellow-50 rounded-xl shadow-lg p-12 text-center">
+      <h2 class="text-4xl font-bold mb-8 text-gray-900">Horario de Atención</h2>
+      <div class="text-lg text-gray-700 space-y-3 max-w-md mx-auto">
+        <p><strong>Lunes a Viernes:</strong> 9:00 AM - 8:00 PM</p>
+        <p><strong>Sábado:</strong> 9:00 AM - 6:00 PM</p>
+        <p><strong>Domingo:</strong> Cerrado</p>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="my-20 max-w-md mx-auto bg-white rounded-xl shadow-lg p-10">
+      <h2 class="text-4xl font-bold mb-8 text-center text-gray-900">Contáctanos</h2>
+      <form id="contact-form" class="space-y-6">
+        <input type="text" name="nombre" placeholder="Tu nombre" required class="w-full p-4 border border-gray-300 rounded focus:outline-yellow-500 focus:ring-2 focus:ring-yellow-400" />
+        <input type="email" name="email" placeholder="Tu correo electrónico" required class="w-full p-4 border border-gray-300 rounded focus:outline-yellow-500 focus:ring-2 focus:ring-yellow-400" />
+        <textarea name="mensaje" rows="5" placeholder="Tu mensaje" required class="w-full p-4 border border-gray-300 rounded focus:outline-yellow-500 focus:ring-2 focus:ring-yellow-400"></textarea>
+        <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-4 rounded shadow transition">Enviar Mensaje</button>
+      </form>
+      <p id="form-message" class="mt-4 text-center text-green-600 hidden">¡Gracias por contactarnos! Te responderemos pronto.</p>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-900 text-gray-300 text-center py-6">
+    <p>© 2024 Barbería El Estilo. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="">
+    <div id="modal-content">
+      <button id="close-modal" aria-label="Cerrar modal">&times;</button>
+      <h3 id="modal-title" class="text-2xl font-bold mb-4 text-center">Agendar Cita</h3>
+      <form id="appointment-form" class="space-y-4">
+        <input type="text" name="nombre" placeholder="Tu nombre" required class="w-full p-3 border border-gray-300 rounded focus:outline-yellow-500 focus:ring-2 focus:ring-yellow-400" />
+        <input type="email" name="email" placeholder="Tu correo electrónico" required class="w-full p-3 border border-gray-300 rounded focus:outline-yellow-500 focus:ring-2 focus:ring-yellow-400" />
+        <label for="fecha" class="block font-semibold">Fecha</label>
+        <input type="date" id="fecha" name="fecha" required class="w-full p-3 border border-gray-300 rounded focus:outline-yellow-500 focus:ring-2 focus:ring-yellow-400" min="" />
+        <label for="hora" class="block font-semibold">Hora</label>
+        <select id="hora" name="hora" required class="w-full p-3 border border-gray-300 rounded focus:outline-yellow-500 focus:ring-2 focus:ring-yellow-400">
+          <option value="" disabled selected>Selecciona una hora</option>
+          <option value="09:00">09:00 AM</option>
+          <option value="10:00">10:00 AM</option>
+          <option value="11:00">11:00 AM</option>
+          <option value="12:00">12:00 PM</option>
+          <option value="13:00">01:00 PM</option>
+          <option value="14:00">02:00 PM</option>
+          <option value="15:00">03:00 PM</option>
+          <option value="16:00">04:00 PM</option>
+          <option value="17:00">05:00 PM</option>
+          <option value="18:00">06:00 PM</option>
+          <option value="19:00">07:00 PM</option>
+        </select>
+        <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded shadow transition">Confirmar Cita</button>
+      </form>
+      <p id="appointment-message">¡Cita agendada con éxito! Te contactaremos pronto.</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('modal');
+      const openModalBtn = document.getElementById('open-modal');
+      const closeModalBtn = document.getElementById('close-modal');
+      const appointmentForm = document.getElementById('appointment-form');
+      const appointmentMessage = document.getElementById('appointment-message');
+      const fechaInput = document.getElementById('fecha');
+
+      // Establecer fecha mínima hoy
+      const today = new Date().toISOString().split('T')[0];
+      fechaInput.setAttribute('min', today);
+
+      // Ocultar mensaje inicialmente
+      appointmentMessage.style.display = 'none';
+
+      openModalBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        resetForm();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          resetForm();
+        }
+      });
+
+      appointmentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        appointmentMessage.style.display = 'block';
+        appointmentForm.reset();
+        setTimeout(() => {
+          appointmentMessage.style.display = 'none';
+          modal.classList.remove('active');
+        }, 4000);
+      });
+
+      function resetForm() {
+        appointmentForm.reset();
+        appointmentMessage.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
