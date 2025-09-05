@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat IA 2 - Asistente Inteligente</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #chat-window {
+      display: flex;
+      flex-direction: column;
+      height: 400px;
+      overflow-y: auto;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      background: #f0fdf4;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+  <header class="bg-green-600 text-white p-4 text-center font-bold text-xl">Chat IA 2</header>
+  <main class="flex-grow p-4 flex flex-col">
+    <div id="chat-window" class="mb-4"></div>
+    <form id="chat-form" class="flex space-x-2">
+      <input id="message-input" type="text" placeholder="Escribe tu mensaje..." class="flex-grow p-2 border rounded" autocomplete="off" required />
+      <button type="submit" class="bg-green-600 text-white px-4 rounded">Enviar</button>
+      <button type="button" id="clear-btn" class="bg-red-500 text-white px-4 rounded">Limpiar</button>
+    </form>
+  </main>
+  <footer class="p-4 text-center bg-green-600 text-white">
+    <a href="../index.html" class="underline hover:text-gray-200">Volver al portafolio</a>
+  </footer>
+
+  <script>
+    const chatWindow = document.getElementById('chat-window');
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+    const clearBtn = document.getElementById('clear-btn');
+
+    function addMessage(text, fromUser  = true) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = fromUser  ? 'flex justify-end' : 'flex justify-start';
+      msgDiv.innerHTML = `<div class="${fromUser  ? 'bg-green-500 text-white' : 'bg-green-200 text-green-900'} p-2 rounded-lg max-w-xs break-words">${text}</div>`;
+      chatWindow.appendChild(msgDiv);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function botResponse(userMsg) {
+      const responses = [
+        "Estoy aquí para ayudarte con lo que necesites.",
+        "¿Quieres que te muestre algunas opciones?",
+        "Por favor, dime más detalles.",
+        "¡Gracias por tu mensaje!",
+      ];
+      const randomIndex = Math.floor(Math.random() * responses.length);
+      return responses[randomIndex];
+    }
+
+    chatForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const msg = messageInput.value.trim();
+      if (!msg) return;
+      addMessage(msg, true);
+      messageInput.value = '';
+      setTimeout(() => {
+        addMessage(botResponse(msg), false);
+      }, 700);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      chatWindow.innerHTML = '';
+      addMessage("¿En qué puedo ayudarte?", false);
+    });
+
+    // Mensaje inicial
+    addMessage("¿En qué puedo ayudarte?", false);
+  </script>
+</body>
+</html>
