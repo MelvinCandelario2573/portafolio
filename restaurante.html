@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazón Criollo - Restaurante</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for uniqueness and animations */
+        .hero-bg {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1);
+            animation: gradientShift 6s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        .dish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #FF6B6B;
+        }
+        /* Ensure responsive images with fallback */
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-container img[src=""] {
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            color: #999;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <nav id="navbar" class="fixed top-0 w-full bg-white shadow-lg z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">Sazón Criollo</h1>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#inicio" class="nav-link text-gray-600">Inicio</a></li>
+                <li><a href="#menu" class="nav-link text-gray-600">Menú</a></li>
+                <li><a href="#sobre" class="nav-link text-gray-600">Sobre Nosotros</a></li>
+                <li><a href="#contacto" class="nav-link text-gray-600">Contacto</a></li>
+            </ul>
+            <button class="md:hidden" onclick="toggleMenu()">☰</button>
+        </div>
+        <ul id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <li><a href="#inicio" class="block px-4 py-2 nav-link text-gray-600">Inicio</a></li>
+            <li><a href="#menu" class="block px-4 py-2 nav-link text-gray-600">Menú</a></li>
+            <li><a href="#sobre" class="block px-4 py-2 nav-link text-gray-600">Sobre Nosotros</a></li>
+            <li><a href="#contacto" class="block px-4 py-2 nav-link text-gray-600">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="inicio" class="hero-bg text-white h-screen flex items-center justify-center pt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-4 animate-pulse">Bienvenidos a Sazón Criollo</h2>
+            <p class="text-xl mb-8">Disfruta de los sabores auténticos de la cocina criolla con ingredientes frescos y pasión.</p>
+            <div class="image-container max-w-md mx-auto mb-8">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fad61024-d34a-49fb-9934-21ca6108557c.png" alt="Vibrant Caribbean restaurant exterior with colorful tiles, palm trees, and a warm bistro atmosphere in a tropical setting day" class="rounded-lg shadow-lg" />
+            </div>
+            <button onclick="scrollToSection('menu')" class="bg-white text-gray-800 px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition">Ver Menú</button>
+        </div>
+    </section>
+
+    <section id="menu" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Nuestro Menú</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="dish-card bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="image-container mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/620910d5-3ec0-48e6-8c09-310ea781d58b.png" alt="Steaming hot rice and beans with roasted pork, plantains, and fresh salsa garnished with cilantro in a traditional ceramic bowl on a wooden table" class="rounded-md" />
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Arroz con Pollo</h3>
+                    <p class="text-gray-600 mb-4">Pollo tierno cocido con arroz, verduras frescas y nuestro secreto criollo.</p>
+                    <span class="text-red-500 font-bold">$12.99</span>
+                </div>
+                <div class="dish-card bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="image-container mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0f14bdf6-2c5c-462a-b440-750e8d1fa8e4.png" alt="Fresh ceviche bowl with diced fish, onions, cilantro, and lime sauce served in a vibrant red ceramic dish with tortilla chips" class="rounded-md" />
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Ceviche Mixto</h3>
+                    <p class="text-gray-600 mb-4">Mezcla de mariscos frescos marinado en jugo de limón con verduras crudas.</p>
+                    <span class="text-red-500 font-bold">$14.99</span>
+                </div>
+                <div class="dish-card bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="image-container mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/35b88114-41cc-413b-8b89-ff727dd148e8.png" alt="Hearty beef stew with potatoes, carrots, and aromatic herbs served in a rustic clay pot with bread on the side" class="rounded-md" />
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Sancocho</h3>
+                    <p class="text-gray-600 mb-4">Estofado tradicional de res con raíces y condimentos de la tierra.</p>
+                    <span class="text-red-500 font-bold">$13.50</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <div class="image-container">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d61401f1-42f6-47c5-8f04-ddfed171f6e4.png" alt="Smiling chef in a crisp white apron preparing ingredients with passion in a bustling kitchen with steam rising from pots and fresh herbs" class="rounded-lg shadow-lg" />
+                </div>
+            </div>
+            <div class="md:w-1/2 md:pl-8">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800">Sobre Nosotros</h2>
+                <p class="text-gray-600 mb-4">En Sazón Criollo, nos dedicamos a preservar las tradiciones culinarias criollas desde hace más de 20 años. Cada plato es preparado con amor, utilizando ingredientes frescos y recetas transmitidas de generación en generación.</p>
+                <p class="text-gray-600 mb-4">Nuestra misión es transportarte a los vibrantes sabores de Latinoamérica, creando experiencias inolvidables en un ambiente acogedor y moderno.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Contacto</h2>
+            <form id="contact-form" class="space-y-6">
+                <div>
+                    <label class="block text-gray-700">Nombre</label>
+                    <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Email</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Mensaje</label>
+                    <textarea id="message" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 h-32" required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-lg font-bold hover:bg-red-600 transition">Enviar</button>
+            </form>
+            <div class="text-center mt-8">
+                <p class="text-gray-600">Dirección: Calle Principal 123, Ciudad Criolla</p>
+                <p class="text-gray-600">Teléfono: +1 (234) 567-8900</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <p>© 2023 Sazón Criollo. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // JavaScript for interactivity
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form submission (basic alert, in real app use backend)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gracias por tu mensaje. Te contactaremos pronto!');
+            this.reset();
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('shadow-xl');
+            } else {
+                navbar.classList.remove('shadow-xl');
+            }
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+    </script>
+</body>
+</html>
+</content>
+</create_file>
