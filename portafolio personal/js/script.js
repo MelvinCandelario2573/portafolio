@@ -9,18 +9,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
-
-// Manejo de envío de formulario de contacto
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  const nombre = formData.get('nombre');
-  const email = formData.get('email');
-  const mensaje = formData.get('mensaje');
-
-  // En un proyecto real, aquí enviarías los datos a un servidor
-  alert(`Gracias, ${nombre}! Tu mensaje ha sido enviado desde ${email}. Mensaje: ${mensaje}`);
-
-  // Limpiar el formulario
-  this.reset();
-});
